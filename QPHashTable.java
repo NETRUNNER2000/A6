@@ -24,6 +24,20 @@ public class QPHashTable  extends HashTable {
      *
      */
     protected int findIndex(String key) {
-		// Implement using quadratic probing.
+		  // Implement using quadratic probing.
+      int hashVal = 0;
+      for (int i = 0; i < key.length(); i++) {
+         hashVal += key.charAt(i);
+      }
+      this.resetProbeCount();
+      int i=0;
+      while(this.getProbeCount() < this.tableSize()){
+         if(table[(hashVal + i*i)%this.tableSize()] == null){
+           return (hashVal + i*i)%this.tableSize();
+         }
+         i++;
+         this.incProbeCount();
+      }
+      return -1;
     }
 }

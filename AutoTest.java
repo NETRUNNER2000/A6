@@ -85,6 +85,7 @@ public abstract class AutoTest {
                 }
 			}
         }
+        scanner.close();
     }
 
 }
