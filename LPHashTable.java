@@ -25,14 +25,15 @@ public class LPHashTable extends HashTable {
      */
     protected int findIndex(String key) {
 		// Implement using linear probing.
-       int hashVal = 0;
+       long hashVal = 0;
        for (int i = 0; i < key.length(); i++) {
-          hashVal = (37*hashVal) + key.charAt(i);
+          hashVal = (hashVal*31) + key.charAt(i);
        }
+
        int i=0;
        while(this.getProbeCount() < this.tableSize()){
-          if(table[(hashVal + i)%this.tableSize()] == null){
-            return (hashVal + i)%this.tableSize();
+          if(table[(int) ((hashVal + i)%this.tableSize())] == null){
+            return (int) ((hashVal + i)%this.tableSize());
           }
           i++;
           this.incProbeCount();
